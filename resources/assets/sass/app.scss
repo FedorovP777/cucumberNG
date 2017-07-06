@@ -1,0 +1,93 @@
+// Fonts
+//@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+// Variables
+@import "variables";
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+//
+.modal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 100; /* Sit on top */
+  overflow: auto; /* Enable scroll if needed */
+  //background-color: rgb(0, 0, 0); /* Fallback color */
+  //background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+
+  margin-top: 10%;
+  background-color: #fefefe;
+  //margin-top: 15%; /* 15% from the top and centered */
+  // padding: 20px;
+  border: 1px solid #888;
+  // width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.styled-background {
+
+  color: #ffff;
+}
+
+.CodeMirror {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+//.CodeMirror-selected  { background-color: blue !important; }
+.CodeMirror-selectedtext {
+  color: white;
+}
+
+.styled-background {
+  background-color: rgba(255, 1, 1, 0.79);
+}
+
+.active-config-item {
+  background-color: #00974d;
+  color: white;
+}
+
+html, body {
+
+  height: 100%;
+
+}
+
+.head-menu {
+
+  height: 50px;
+  padding: 10px;
+}
+
+.main-container {
+
+  height: 100%;
+  /*margin: 0;*/
+  /*padding: 0;*/
+  overflow: hidden;
+}
+
+.scroll-left-list {
+  height: 90%;
+  /*margin: 0;*/
+  /*padding: 0;*/
+  overflow: scroll;
+}
