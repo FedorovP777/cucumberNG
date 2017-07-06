@@ -1,0 +1,38 @@
+/**
+ * Created by pavel on 14.06.17.
+ */
+export default {
+
+    "ADD": "Добавить",
+    "FILTER": "Фильтр",
+    "HOSTNAME": "Доменное имя",
+    "LINE": "Строка",
+    "CHARSET": "Символ",
+    "DIRECTIVE": "Директива",
+    "SYNTAX": "Синтаксис",
+    "DEFAULT_VALUE": "Значение по умолчанию",
+    "CONTEXT": "Контекст",
+    "DESCRIPTION": "Описание",
+    "VIRTUAL_HOSTS": "Виртуальные хосты",
+    "MAIN_CONFIG": "Конфигурация NGINX",
+    "SETTINGS": "Настройки",
+    "SAVE": "Сохранить",
+    "PASTE_TEMPLATE": "Вставить шаблон",
+    "SHOW": "Показать",
+    "PASTE": "Вставить",
+    "LANGUAGE": "Язык",
+    "OPTIONS": "Опции",
+    "TEMPLATES": "Шаблоны",
+    "DOCUMENTATION": "Документация",
+    "NAME": "Имя",
+    "RENAME": "Переименовать",
+    "CANCEL": "Отмена",
+    "CREATE": "Создать",
+    "ENTER_NEW_NAME_FILE": "Новое имя файла",
+    "DELETE": "Удалить",
+    "DELETE_FILE": "Удалить файл",
+    "CONFIG_ERROR": "Конфигурация ошибочна.",
+    "CONFIG_GOOD": "Конфигурация успешно сохранена.",
+    "FILE_EXIST_OR_NAME_UNACCEPTABLE": "Такой файл уже существует или указано неверное имя.",
+    "ADD_NEW_TEMPLATE": "Добавить новый шаблон",
+}
