@@ -1,8 +1,8 @@
 {
-    "name": "cucumberNG\cucumberNG",
-    "description": "edit nginx config in web-interface.",
-    "keywords": ["nginx","web-interface"],
-    "license": "GPL",
+    "name": "fedorov-p777/cucumber-ng",
+    "description": "The Laravel Framework.",
+    "keywords": ["framework", "laravel"],
+    "license": "MIT",
     "type": "project",
     "require": {
         "php": ">=5.6.4",
