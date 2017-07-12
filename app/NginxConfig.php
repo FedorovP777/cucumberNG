@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -40,7 +40,7 @@ class NginxConfig extends Model
     }
 
 
-    public function saveConfig()
+    public function saveConfig(): int
     {
 
         return file_put_contents($this->path, $this->content);
@@ -58,7 +58,7 @@ class NginxConfig extends Model
     }
 
 
-    public function backupInTmp()
+    public function backupInTmp(): bool
     {
 
         $this->tmpPath = '/tmp/'.basename($this->path) . '_' . microtime();
@@ -67,7 +67,7 @@ class NginxConfig extends Model
 
     }
 
-    public function restoreTmp()
+    public function restoreTmp(): bool
     {
        return copy($this->tmpPath, $this->path);
 
@@ -141,13 +141,15 @@ class NginxConfig extends Model
 
     }
 
-    private function deleteFirstEmptyLine(array &$fileLines)
+    private function deleteFirstEmptyLine(array &$fileLines):NginxConfig
     {
 
         unset($fileLines[0]);
+
+        return $this;
     }
 
-    private function parseRawConfig()
+    private function parseRawConfig(): NginxConfig
     {
 
         $result = explode('# configuration file ', $this->rawConfig);
@@ -172,15 +174,17 @@ class NginxConfig extends Model
             array_push($this->configs, $confObj);
         }
 
-        return true;
+        return $this;
 
     }
 
-    private function getRawConfig()
+    private function getRawConfig(): NginxConfig
     {
         $rawConf = shell_exec("nginx -T");
 
         $this->rawConfig = $rawConf;
+
+        return $this;
     }
 
 

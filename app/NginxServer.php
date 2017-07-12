@@ -1,8 +1,8 @@
 <?php
-
+declare(strict_types=1);
 namespace App;
 
-use function foo\func;
+
 use Illuminate\Database\Eloquent\Model;
 
 class NginxServer extends Model
@@ -14,17 +14,19 @@ class NginxServer extends Model
     private $errorObj = ['typeError' => null, 'configFile' => null, 'rowError' => null];
 
 
-    public function checkConfig()
+    public function checkConfig(): NginxServer
     {
 
         $this->rawResult = shell_exec("nginx -t 2>&1");
 
         $this->parseCheckResult();
 
+        return $this;
+
     }
 
 
-    private function parseCheckResult()
+    private function parseCheckResult(): NginxServer
     {
 
         $re = '/^.*\[(emerg|warn|error)\].*$/m';
@@ -35,32 +37,41 @@ class NginxServer extends Model
 
             $obj = (object)$this->errorObj;
             $obj->typeError = $itemError[1];
+            $obj->configFile = null;
+            $obj->rowError = null;
+            $parseRow = $this->parseFileInError($itemError[0]);
+            if (sizeof($parseRow) === 2) {
+                $parseRow = (object)$parseRow;
+                $obj->configFile = $parseRow->fileName;
+                $obj->rowError = $parseRow->row;
+
+            }
 
 
-            $obj->configFile = $this->parseFileInError($itemError[0])[1];
-            $obj->rowError = $this->parseFileInError($itemError[0])[2];
-            //   var_dump($obj);
             array_push($this->errors, $obj);
         }
 
+        return $this;
 
     }
 
-    private function parseFileInError($str)
+    private function parseFileInError($str): array
     {
 
         $re = '/in\s(.*):([[:digit:]]*)/m';
         preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
 
-        if (sizeof($matches) > 0) {
+        if (sizeof($matches) > 0 && isset($matches[0][1]) && isset($matches[0][2])) {
 
-            return $matches[0];
+            return ['fileName' => $matches[0][1], 'row' => $matches[0][2]];
         }
-        return [null, null, null];
+
+
+        return [];
 
     }
 
-    public function reloadConfig()
+    public function reloadConfig(): string
     {
 
 

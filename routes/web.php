@@ -17,12 +17,6 @@ Route::get('/', function () {
 });
 
 
-//Route::get('/key', function (Request $request) {
-//
-//dd($request->session()->get('key'));
-//    echo config('app.keymd5');
-//
-//});
 
 Route::resource('/config', 'ConfigController');
 Route::resource('/setting', 'SettingsController');
