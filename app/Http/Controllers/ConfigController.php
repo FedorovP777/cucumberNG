@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\NginxServer;
@@ -18,8 +18,7 @@ class ConfigController extends Controller
     {
 
         $ngxConfig = new NginxConfig();
-        $nginxServer = new NginxServer();
-        $nginxServer->checkConfig();
+
         $result = $ngxConfig->getAllHosts();
 
         return response()->json($result);
@@ -70,7 +69,7 @@ class ConfigController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  string $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)

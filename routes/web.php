@@ -10,20 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-use Illuminate\Http\Request;
+
 Route::get('/', function () {
 
     return view('index');
 });
 
 
-//Route::get('/key', function (Request $request) {
-//
-//dd($request->session()->get('key'));
-//    echo config('app.keymd5');
-//
-//});
 
 Route::resource('/config', 'ConfigController');
 Route::resource('/setting', 'SettingsController');
-
