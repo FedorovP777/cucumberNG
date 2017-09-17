@@ -37,8 +37,6 @@ class start extends Command
      */
     public function handle()
     {
-
-
         $this->callSilent('key:generate');
         $this->info('Open your browser http://0.0.0.0:' . $this->option('port') . '/' . config('app.keymd5'));
         $this->callSilent("serve", [
@@ -46,6 +44,5 @@ class start extends Command
             '--port' => $this->option('port')
 
         ]);
-
     }
 }
