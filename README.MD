@@ -1,4 +1,5 @@
-# cucumberNG  
+# CucumberNG
+_Web-interface for editing config files nginx._
 
 ### Install   
 ```
