@@ -11,9 +11,7 @@ let mix = require('laravel-mix');
  |
  */
 
-
 mix.js('resources/assets/js/app.js', 'public/js')
-    .sass('resources/assets/sass/app.scss', 'public/css')
+   .sass('resources/assets/sass/app.scss', 'public/css')
     .styles(['node_modules/codemirror/lib/codemirror.css','node_modules/codemirror/theme/monokai.css','node_modules/codemirror/addon/hint/show-hint.css'], 'public/css/main.css')
-    .browserSync('localhost:8000')
-;
+    .version();

@@ -1,12 +1,11 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Example Component</div>
-
-                    <div class="panel-body">
-                        I'm an example component!
+    <div class="flex-center position-ref full-height">
+        <div class="top-static-block">
+            <head-panel></head-panel>
+            <div class="container search-file-card">
+                <div class="card">
+                    <div class="card-body p-1">
+345
                     </div>
                 </div>
             </div>

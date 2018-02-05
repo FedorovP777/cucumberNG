@@ -1,93 +1,152 @@
 // Fonts
-//@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 // Variables
 @import "variables";
 // Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-//
-.modal {
-  display: none; /* Hidden by default */
-  position: absolute; /* Stay in place */
-  z-index: 100; /* Sit on top */
-  overflow: auto; /* Enable scroll if needed */
-  //background-color: rgb(0, 0, 0); /* Fallback color */
-  //background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+@import "./node_modules/bootstrap/scss/bootstrap.scss";
+
+.btn {
+
+  box-shadow: $shadow;
 }
 
-/* Modal Content/Box */
-.modal-content {
+.btn:focus {
 
-  margin-top: 10%;
-  background-color: #fefefe;
-  //margin-top: 15%; /* 15% from the top and centered */
-  // padding: 20px;
-  border: 1px solid #888;
-  // width: 80%; /* Could be more or less, depending on screen size */
+  box-shadow: $shadow;
 }
 
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+.btn:hover {
+  cursor: pointer;
+  box-shadow: $shadow-hover;
+
 }
 
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
+.pointer {
+
   cursor: pointer;
 }
 
-.styled-background {
+.file-config-item:hover {
 
-  color: #ffff;
+  cursor: pointer;
+  box-shadow: $shadow-hover;
+}
+
+.file-config-item {
+
+  margin-top: 20px;
+  box-shadow: $shadow;
+
+}
+
+.file-config-item:hover {
+
+  cursor: pointer;
+  box-shadow: $shadow-hover;
+
+}
+
+body{
+
+  min-width: 1024px;
+}
+
+.container {
+  max-width: 600px;
+}
+
+.list-files-config {
+
+  position: relative;
+  //z-index: ;
+}
+
+.top-static-block {
+
+  height: 250px;
+  top: 0px;
+  position: sticky;
+  background-color: $body-bg;
+  z-index: 10;
+
+}
+
+.decorate-nav-bar-line {
+  background-color: $secondary1-color;
+  height: 13px;
+  position: sticky;
+  top: 0;
+}
+
+.nav-bar-custom {
+  background-color: $primary1-color;
+  position: sticky;
+  top: 13px;
+  height: 50px;
+  box-shadow: $shadow
+}
+
+.search-file-card {
+  position: sticky;
+  top: 150px;
+  .card-body {
+    box-shadow: $shadow
+  }
+  .card-body:hover {
+    box-shadow: $shadow-hover
+  }
+}
+
+.search-form-input {
+  border: 0px solid rgba(0, 0, 0, 0.15);
+}
+
+.add-file-button {
+
+  position: sticky;
+
+  left: 100%;
+  bottom: 20px;
+  color: #0d3625;
+  text-shadow: 2px 2px 7px #a2a2a2;
+
+}
+
+.add-file-button:hover {
+
+  text-shadow: 6px 6px 7px #a2a2a2;
+}
+
+.material-icons {
+
+  &.md-18 {
+    font-size: 18px;
+  }
+
+  &.md-24 {
+    font-size: 24px;
+  }
+
+  &.md-36 {
+    font-size: 36px;
+  }
+
+  &.md-48 {
+    font-size: 48px;
+  }
+
+  &.md-prim-color {
+    color: $primary1-color;
+  }
+
+}
+
+
+.card-paste-template-button{
+
 }
 
 .CodeMirror {
   border-top: 1px solid black;
   border-bottom: 1px solid black;
-}
-
-//.CodeMirror-selected  { background-color: blue !important; }
-.CodeMirror-selectedtext {
-  color: white;
-}
-
-.styled-background {
-  background-color: rgba(255, 1, 1, 0.79);
-}
-
-.active-config-item {
-  background-color: #00974d;
-  color: white;
-}
-
-html, body {
-
-  height: 100%;
-
-}
-
-.head-menu {
-
-  height: 50px;
-  padding: 10px;
-}
-
-.main-container {
-
-  height: 100%;
-  /*margin: 0;*/
-  /*padding: 0;*/
-  overflow: hidden;
-}
-
-.scroll-left-list {
-  height: 90%;
-  /*margin: 0;*/
-  /*padding: 0;*/
-  overflow: scroll;
 }

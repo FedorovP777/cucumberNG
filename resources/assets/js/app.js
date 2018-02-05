@@ -1,147 +1,76 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
-// const Vuex = require('vuex');
-import VueRouter from 'vue-router';
-import Vuex from 'vuex';
+// window.Vue = require('vue');
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import VueResource from 'vue-resource';
 
-
-Vue.component('CodeMirror', require('./components/CodeEditPage/CodeMirror.vue'));
-Vue.component('ConfigFilesList', require('./components/CodeEditPage/ConfigFilesList.vue'));
-Vue.component('NavigationMenu', require('./components/NavigationMenu.vue'));
-Vue.component('CreateNewConfigFile', require('./components/CodeEditPage/CreateNewConfigFile.vue'));
-Vue.component('ChangeNameConfigFile', require('./components/CodeEditPage/ChangeNameConfigFile.vue'));
-Vue.component('DeleteFileConfig', require('./components/CodeEditPage/DeleteFileConfig.vue'));
-
-Vue.component('TemplateBlock', require('./components/CodeEditPage/TemplateBlock.vue'));
-Vue.use(Vuex);
 Vue.use(VueRouter);
+Vue.use(VueResource);
+const mainComponent = require('./components/MainComponent.vue');
+const editConfigPage = require('./components/EditConfigPage.vue');
+const newFile=require('./components/NewFile.vue');
 
-import store from './store'
+Vue.component('example', require('./components/Example.vue'));
+Vue.component('main-component', mainComponent);
+Vue.component('head-panel', require('./components/HeadPanel.vue'));
+Vue.component('edit-config-page', editConfigPage);
+Vue.component('code-mirror', require('./components/CodeMirror.vue'));
+Vue.component('templates', require('./components/Templates.vue'));
+Vue.component('new-file', newFile);
 
+const routes = [
+    {path: '/', component: mainComponent},
+    {path: '/edit-file/:id' ,component: editConfigPage},
+    {path: '/new-file/' ,component: newFile}
+];
 const router = new VueRouter({
-
-
-    routes: [
-
-        {
-
-            path: '/hosts/',
-            component: require('./components/CodeEditPage/CodeEditPage.vue'),
-
-        },
-        {
-
-            path: '/mainconf/',
-            component: require('./components/CodeEditPage/CodeEditPage.vue')
-        },
-        {
-
-            path: '', redirect: '/hosts/'
-
-        },
-        {
-
-            path: '/setting/',
-            component: require('./components/SettingPage/SettingPage.vue'),
-            children: [
-
-                {
-                    path: '', redirect: 'options',
-
-                },
-                {
-
-                    path: 'options',
-                    component: require('./components/SettingPage/Options.vue'),
-
-                },
-                {
-
-                    path: 'templates/:id',
-                    component: require('./components/SettingPage/Templates.vue'),
-
-                },
-                {
-
-                    path: 'documentation/:id',
-                    component: require('./components/SettingPage/Documentation.vue'),
-
-                }
-            ]
-
-        },
-    ]
+    routes
 });
 
-const template = `
-   <div class="container-fluid main-container">
-        <NavigationMenu></NavigationMenu>
-        <router-view
-        @createNewConfig="createNewConfig"
-        ></router-view>
-    </div>
-`;
+Vue.http.options.root = '/';
+Vue.http.headers.common['Authorization'] = 'Basic YXBpOnBhc3N3b3Jk';
 
 const app = new Vue({
-    store,
+    data(){
+
+       let  test ="test";
+       let documentation = [];
+       let configTemplates =[];
+       return {test,documentation,configTemplates}
+    },
+    router,
+    template: '<div><router-view :documentation="documentation" :configTemplates="configTemplates"></router-view></div>',
     el: '#app',
-    router: router,
-    template: template,
+
     methods: {
 
-        createNewConfig: function (fileName) {
+        loadDocumentation() {
 
-            console.log(fileName);
+            this.$http.get('/documentation/en.json').then((response) => {
+
+                this.documentation.splice(0, this.documentation.length - 1);
+
+                for (let item of response.body) {
+
+                    this.documentation.push(item);
+                }
+            })
         },
-        downloadOptions: function () {
+        loadConfigTemplates(){
+            this.$http.get('/templates.json').then((response) => {
 
-            return this.$http.get('/setting/options');
-        },
-        downloadTemplates: function () {
+                this.configTemplates.splice(0, this.configTemplates.length - 1);
 
-            return this.$http.get('/setting/templates');
-        },
-        downloadDocumentation: function () {
+                for (let item of response.body) {
 
-            return this.$http.get('/setting/documentation');
-        },
-        downloadHosts: function () {
-
-            return this.$http.get('/config');
+                    this.configTemplates.push(item);
+                }
+            })
         }
     },
-    created: function () {
+    created() {
+this.loadConfigTemplates();
+        this.loadDocumentation();
 
-        Promise.all([
-
-            this.downloadOptions(),
-            this.downloadTemplates(),
-            this.downloadDocumentation(),
-            this.downloadHosts()
-
-        ]).then((response) => {
-
-                this.$store.dispatch('changeOptions', response[0].body);
-                this.$store.dispatch('changeTemplates', response[1].body);
-                this.$store.dispatch('documentation', response[2].body);
-                this.$store.dispatch('changeHosts', response[3].body);
-
-            },
-            error => {
-
-            });
-
-
-    },
-
-
-    beforeRouteEnter: function () {
-        console.log('beforeEnter');
     }
 });
-

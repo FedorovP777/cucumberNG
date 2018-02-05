@@ -224,6 +224,5 @@
     .CodeMirror {
         border: 1px solid #eee;
         height: auto;
-        font-size: 70%
     }
 </style>
